@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mandrill Event Notifications</title>
+</head>
+<body>
+    <h1>Mandrill Event Notifications</h1>
+    <ul id="events"></ul>
+
+    <script>
+        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        var webSocket = new WebSocket(ws_scheme + '://' + window.location.host + '/ws/events/');
+
+        webSocket.onmessage = function(event) {
+            var data = JSON.parse(event.data);
+            var eventsList = document.getElementById('events');
+            var listItem = document.createElement('li');
+            listItem.textContent = 'Email Opened: Message ID ' + data.message_id + ' at ' + new Date(data.ts * 1000).toLocaleString();
+            eventsList.appendChild(listItem);
+        };
+
+        webSocket.onclose = function(event) {
+            console.error('WebSocket closed unexpectedly');
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+X POST https://a8d2-207-162-137-211.ngrok-free.app/mandrill/ \
+-H "Content-Type: application/json" \
+-d '[
+      {
+        "event": "open",
+        "msg": { "_id": "12345", "email": "test@example.com" },
+        "ts": 1635098273
+      },
+      {
+        "event": "click",
+        "msg": { "_id": "67890", "email": "user@example.com" },
+        "ts": 1635098373
+      }
+    ]'
+
+{"status": "success"}
